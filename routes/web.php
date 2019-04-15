@@ -13,5 +13,6 @@
 /*Pass trought a controller*/
 Route::get('/','WebViewController@viewHompage');
 Route::get('login','WebViewController@viewLogin');
-Route::get('register','WebAuthController@register');
+Route::get('register','WebViewController@viewRegister');
 Route::get('logout', 'WebAuthController@logout');
+Route::get('dashboard', 'WebViewController@viewDashboard');

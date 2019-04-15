@@ -31,8 +31,8 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+        session('status',200);
+        return redirect()->action('WebViewController@viewDashboard')->with('tokenfController', $token);
     }
 
     /**

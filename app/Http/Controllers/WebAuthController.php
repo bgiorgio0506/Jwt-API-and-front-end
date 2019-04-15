@@ -9,6 +9,7 @@ class WebAuthController extends Controller
 {
   public function JWTLogin(Request $request)
   {
+  // Making  client side request to the login endpoint
   $email = input::get('email');
   $psw = input::get('password');
   $curl = curl_init();
@@ -32,19 +33,16 @@ class WebAuthController extends Controller
           $err = curl_error($curl);
 
    curl_close($curl);
-   $result=json_decode($response,true);
-   if ($result['access_token'] != null) {
-     echo 'Not Logged in error:'.$result['message'];
-     //return session('status',403)->middleware('WebAuthenticate'):
-   }else{
-     echo 'Logged... token is: '.$result['access_token'].'';
-     //return session('status',200)->middleware('WebAuthenticate');
-   }
   }
   public function register()
   {
+    //Create client side request to API route 'api/auth/register for registretion'
+    $name = input::get('name');
+    $email = input::get('email');
+    $pass = input::get('password');
+    $passconfirm = input::get('password-confirm');
     $curl = curl_init();
-    $curl_data = ['name'=>'GiorgioB','email'=>'giorgio00@gmail.com', 'password'=>'secret01', 'password_confirmation'=>'secret01'];
+    $curl_data = ['name'=>$name,'email'=> $email, 'password'=>$pass, 'password_confirmation'=>$passconfirm];
     $curl_data = json_encode($curl_data);
    curl_setopt_array($curl, array(
     CURLOPT_URL => "http://jwtall.test/api/auth/register",
@@ -64,7 +62,5 @@ class WebAuthController extends Controller
             $err = curl_error($curl);
 
   curl_close($curl);
-     $result=json_decode($response,true);
-    var_dump($result);
   }
 }

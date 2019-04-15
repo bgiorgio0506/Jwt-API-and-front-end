@@ -16,6 +16,10 @@ class WebViewController extends Controller
     }
     public function viewRegister()
     {
-      return;
+      return view('register');
+    }
+    public function viewDashboard()
+    {
+      return view('dashboard')->with('token',session('tokenfController'));
     }
 }

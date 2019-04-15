@@ -26,7 +26,7 @@ class RegisterControllerWeb extends Controller
            if($validator->fails()){
                    return response()->json($validator->errors()->toJson(), 400);
            }
-           //$filable = ['name','email','password'];
+           //Create user
            $user =  User::create([
              'name' => $request['name'],
              'email' => $request['email'],
@@ -34,8 +34,8 @@ class RegisterControllerWeb extends Controller
            ]);
 
            $token = JWTAuth::fromUser($user);
-
-           return response()->json(compact('user','token'),201);
+           return redirect()->action('WebViewController@viewDashboard', ['token' => $token]);
+           //return response()->json(compact('token'),200);
        }
 
 
